@@ -4,6 +4,7 @@ import com.wedding.demo.exceptions.ResourceNotFoundException;
 import com.wedding.demo.models.User;
 import com.wedding.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,8 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/user")
@@ -23,17 +26,17 @@ public class UserController {
         User user =userRepository
                         .findById(userId)
                         .orElseThrow(() -> new ResourceNotFoundException("User "+ userId+" not found" ));
-        return ResponseEntity.ok().body(user);
+        return ok().body(user);
     }
 
     @GetMapping("/")
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ok().body(userRepository.findAll());
     }
 
     @PostMapping("/")
-    public User addUser(@Valid @RequestBody User user){
-        return userRepository.save(user);
+    public ResponseEntity<User> addUser(@Valid @RequestBody User user){
+        return ResponseEntity.ok(userRepository.save(user));
     }
 
     @PutMapping("/{id}")
@@ -56,14 +59,14 @@ public class UserController {
 
 
     @DeleteMapping("/{id}")
-    public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long userId) throws Exception {
+    public ResponseEntity<Long> deleteUser(@PathVariable(value = "id") Long id) throws Exception {
+
         User user = userRepository
-                        .findById(userId)
-                        .orElseThrow(() -> new ResourceNotFoundException("User "+ userId+" not found" ));
+                        .findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("User "+ id+" not found" ));
         userRepository.delete(user);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
 }
