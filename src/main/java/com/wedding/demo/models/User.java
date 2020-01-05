@@ -11,7 +11,16 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
-
+/*
+{
+    "username":"username",
+    "firstName":"firstName",
+    "lastName":"lastName",
+    "email":"email",
+    "password":"password",
+    "avatar":"avatar"
+}
+* */
 @Entity
 @Data
 @NoArgsConstructor
