@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 */
 
 @Entity
-@Table(name = "contact_us")
+@javax.persistence.Table(name = "contact_us")
 @Data
 @NoArgsConstructor
 public class Contact implements Serializable {

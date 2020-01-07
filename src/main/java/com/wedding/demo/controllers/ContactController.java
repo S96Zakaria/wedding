@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/contact")
@@ -55,7 +54,7 @@ public class ContactController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Long> deleteUser(@PathVariable(value = "id") Long id) throws Exception {
+    public ResponseEntity<Long> deleteContact(@PathVariable(value = "id") Long id) throws Exception {
 
         Contact contact = contactRepository
                 .findById(id)
