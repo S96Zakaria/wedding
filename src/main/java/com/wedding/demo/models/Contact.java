@@ -1,6 +1,7 @@
 package com.wedding.demo.models;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "contact_us")
 @Data
+@NoArgsConstructor
 public class Contact implements Serializable {
     @Id
     @GeneratedValue

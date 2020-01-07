@@ -10,17 +10,19 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 /*
-{
-    "username":"username",
-    "firstName":"firstName",
-    "lastName":"lastName",
-    "email":"email",
-    "password":"password",
-    "avatar":"avatar"
-}
-* */
+    {
+        "username":"username",
+        "firstName":"firstName",
+        "lastName":"lastName",
+        "email":"email",
+        "password":"password",
+        "avatar":"avatar"
+    }
+*/
 @Entity
 @Data
 @NoArgsConstructor
@@ -46,6 +48,9 @@ public class User implements Serializable {
     private String password;
 
     private String avatar;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Offre> offers = new HashSet<>();
 
     @CreationTimestamp
     private LocalDateTime createDateTime;
