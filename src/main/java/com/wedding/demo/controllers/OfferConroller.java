@@ -2,8 +2,6 @@ package com.wedding.demo.controllers;
 
 import com.wedding.demo.exceptions.ResourceNotFoundException;
 import com.wedding.demo.models.Offre;
-import com.wedding.demo.models.Offre;
-import com.wedding.demo.repositories.OffreRepository;
 import com.wedding.demo.repositories.OffreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,6 +54,21 @@ public class OfferConroller {
 
         return ResponseEntity.ok(offreRepository.save(offre));
     }
+
+
+
+    @PutMapping("/{id}/disponibilte")
+    public ResponseEntity<Offre> changeDisponibilty(@PathVariable(value = "id") Long id) throws ResourceNotFoundException{
+        Offre offre =offreRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Offre "+ id+" not found" ));
+
+        offre.setDisponible(!offre.isDisponible());
+
+        return ResponseEntity.ok(offreRepository.save(offre));
+    }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Long> deleteOffre(@PathVariable(value = "id") Long id) throws Exception {

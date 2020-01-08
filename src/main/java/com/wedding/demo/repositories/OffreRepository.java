@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OffreRepository extends JpaRepository<Offre, Long> {
+
+//    @Query("select C from Offre C where c.disponible=?1 ")
+//    public
 }

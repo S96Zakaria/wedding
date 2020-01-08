@@ -3,18 +3,29 @@ package com.wedding.demo.controllers;
 import com.wedding.demo.exceptions.ResourceNotFoundException;
 import com.wedding.demo.models.Image;
 import com.wedding.demo.repositories.ImageRepository;
-import com.wedding.demo.repositories.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 @RestController
 @RequestMapping("/image")
 public class ImageController {
+
+    private static final String FILE_DIRECTORY = System.getProperty("user.dir") +"/images/";
+
     @Autowired
     private ImageRepository imageRepository;
 
@@ -32,9 +43,19 @@ public class ImageController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Image> postImage(@RequestBody Image table){
-        return ResponseEntity.ok(imageRepository.save(table));
+    public ResponseEntity<Boolean> uploadImage(@RequestParam("file") MultipartFile[] uploadingFiles) throws IOException {
+        for(MultipartFile uploadedFile : uploadingFiles) {
+            File file = new File(FILE_DIRECTORY + uploadedFile.getOriginalFilename());
+            uploadedFile.transferTo(file);
+            Image image= new Image();
+            image.setLink(uploadedFile.getOriginalFilename());
+            imageRepository.save(image);
+        }
+
+        return ResponseEntity.ok(true);
+
     }
+
 
 
 
