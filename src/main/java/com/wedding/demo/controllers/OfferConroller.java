@@ -1,5 +1,6 @@
 package com.wedding.demo.controllers;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.wedding.demo.exceptions.ResourceNotFoundException;
 import com.wedding.demo.models.Offre;
 import com.wedding.demo.repositories.OffreRepository;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/offre")
 @CrossOrigin("*")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class OfferConroller {
     @Autowired
     private OffreRepository offreRepository;

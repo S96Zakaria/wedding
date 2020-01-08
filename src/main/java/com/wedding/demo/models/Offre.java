@@ -1,6 +1,7 @@
 package com.wedding.demo.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,15 +37,17 @@ public class Offre implements Serializable {
     private User user;
 
     @ManyToMany
-    @JoinTable(name="offre_tables",joinColumns = @JoinColumn(name="offre_id"), inverseJoinColumns = @JoinColumn(name="table_id"))
+    
+    @JoinTable(name="offre_tables",joinColumns = @JoinColumn(name="offre_id"), inverseJoinColumns = @JoinColumn(name="table_id"))   
     private List<Table> tables;
 
     @ManyToMany
-    @JoinTable(name="offre_decorations",joinColumns = @JoinColumn(name="offre_id"), inverseJoinColumns = @JoinColumn(name="decoration_id"))
+    
+    @JoinTable(name="offre_decorations",joinColumns = @JoinColumn(name="offre_id"), inverseJoinColumns = @JoinColumn(name="decoration_id"))   
     private List<Decoration> decorations;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL)
+    
+    @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL)    
     private Set<Image> images = new HashSet<>();
 
 
@@ -52,4 +55,7 @@ public class Offre implements Serializable {
     private LocalDateTime createDateTime;
 
     @UpdateTimestamp
-    private LocalDateTime updateDateTime;}
+    private LocalDateTime updateDateTime;
+    
+    
+}
