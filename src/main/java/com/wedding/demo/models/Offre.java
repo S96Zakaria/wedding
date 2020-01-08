@@ -1,6 +1,7 @@
 package com.wedding.demo.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -42,6 +43,7 @@ public class Offre implements Serializable {
     @JoinTable(name="offre_decorations",joinColumns = @JoinColumn(name="offre_id"), inverseJoinColumns = @JoinColumn(name="decoration_id"))
     private List<Decoration> decorations;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL)
     private Set<Image> images = new HashSet<>();
 

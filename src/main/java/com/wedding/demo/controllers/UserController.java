@@ -17,6 +17,7 @@ import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("*")
 public class UserController {
     @Autowired
     private UserRepository userRepository;

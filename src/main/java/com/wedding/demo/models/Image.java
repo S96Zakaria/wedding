@@ -1,5 +1,6 @@
 package com.wedding.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,9 +16,13 @@ public class Image {
     private long id;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "offre_id")
     private Offre offre;
 
     private String link;
+
+
+
 
 }

@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/offre")
+@CrossOrigin("*")
 public class OfferConroller {
     @Autowired
     private OffreRepository offreRepository;

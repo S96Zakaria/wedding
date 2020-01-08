@@ -21,22 +21,19 @@ import java.time.LocalDateTime;
 */
 
 @Entity
-@javax.persistence.Table(name = "contact_us")
+@javax.persistence.Table(name = "articles")
 @Data
 @NoArgsConstructor
-public class Contact implements Serializable {
+public class Article implements Serializable {
     @Id
     @GeneratedValue
     private long id;
 
-    @Column(name="description", nullable = false)
-    private String description;
+    @Column(name="title", nullable = false)
+    private String title;
 
-    @Column(name="phone_primary", nullable = false)
-    private String phonePrimary;
-
-    @Column(name="phone_secondary")
-    private String phoneSecondary;
+    @Column(name="content", nullable = false)
+    private String content;
 
     @Column(name="avatar", nullable = false)
     private String avatar;

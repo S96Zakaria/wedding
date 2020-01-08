@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/decoration")
+@CrossOrigin("*")
 public class DecorationController {
     @Autowired
     private DecorationRepository decorationRepository;
