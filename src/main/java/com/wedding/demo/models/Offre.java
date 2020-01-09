@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -26,6 +27,7 @@ public class Offre implements Serializable {
 
     private String titre;
 
+    @Size(max = 10000)
     private String description;
 
     private boolean disponible;

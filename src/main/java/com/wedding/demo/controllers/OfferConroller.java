@@ -25,6 +25,12 @@ public class OfferConroller {
         return ResponseEntity.ok().body(offreRepository.findAll());
     }
 
+
+    @GetMapping("/dispo")
+    public ResponseEntity<List<Offre>> getOffresDispo() {
+        return ResponseEntity.ok().body(offreRepository.findByDisponibleIsTrue());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Offre> getOffreById(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
         Offre offre =offreRepository
